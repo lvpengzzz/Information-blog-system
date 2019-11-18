@@ -13,6 +13,9 @@ public interface IBaseUserService {
    
    //查询所有的用户
    List<UserExtend> findAll();
-		
+		   
+   
+   
+   
 	
 }
