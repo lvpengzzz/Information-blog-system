@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.apps.cms.dao.extend.ArticleExtendMapper">
+
+  <select id="selectAll" parameterType="long" resultMap="ArticleExtendResultMap">
+  SELECT * FROM cms_article
+  </select>
+  
+  <select id="selectById" parameterType="long" resultMap="ArticleExtendResultMap">
+  	SElECT * from cms_article
+  	where id=#{id}
+  </select>
+  
+
+	<!-- 通过association 和collection把两个表关联起来。 -->
+
+  <resultMap id="ArticleExtendResultMap" type="com.briup.apps.cms.bean.extend.ArticleExtend"
+    extends="com.briup.apps.cms.dao.ArticleMapper.BaseResultMap">
+    
+   	<!-- 如果查询结果有多个值就用collection。如果查询结果只有一个就用association -->
+    
+    <!-- 通过把文章里的category_id传给cms_category 查出来栏目  。 -->
+    <association property="category" 
+    			column="category_id"
+    			select="com.briup.apps.cms.dao.CategoryMapper.selectByPrimaryKey"
+    ></association>
+    
+    <association property="user"
+    			column="author_id"
+    			select="com.briup.apps.cms.dao.UserMapper.selectByPrimaryKey"
+    ></association>
+    
+    <!-- 通过把文章的id值传给cms_comment表，通过文章查询到所有的评论 -->
+    <collection property="comments"
+    			column="id"
+ 				select="com.briup.apps.cms.dao.extend.CommentExtendMapper.selectByArticleId"	   
+    ></collection>
+    
+    
+    
+  </resultMap>
+  
+  
+</mapper>
