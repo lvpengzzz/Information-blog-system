@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.apps.cms.dao.extend.BaseUserExtendMapper">
+  <resultMap id="BaseUserExtendResultMap" type="com.briup.apps.cms.bean.extend.BaseUserExtend"
+  			extends="com.briup.apps.cms.dao.BaseUserMapper.BaseResultMap">
+  			<!-- 一个用户对应多个权限，把用户的id传给base_roles 查出权限-->
+  			 <collection property="roles" 
+  			 			column="id"
+  			  			select="com.briup.apps.cms.dao.extend.BaseRoleExtendMapper.selectByUserId" ></collection>
+  </resultMap>
+  
+  <select id="selectAll" resultMap="BaseUserExtendResultMap">
+  	select * from 
+  	base_user
+  </select>
+  
+  <select id="selectById"  parameterType="long" resultMap="BaseUserExtendResultMap">
+  	select * from 
+  	base_user 
+  	where id=#{id} 
+  </select>
+  
+   
+</mapper>

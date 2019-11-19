@@ -25,10 +25,7 @@
     			select="com.briup.apps.cms.dao.CategoryMapper.selectByPrimaryKey"
     ></association>
     
-    <association property="user"
-    			column="author_id"
-    			select="com.briup.apps.cms.dao.UserMapper.selectByPrimaryKey"
-    ></association>
+ 
     
     <!-- 通过把文章的id值传给cms_comment表，通过文章查询到所有的评论 -->
     <collection property="comments"

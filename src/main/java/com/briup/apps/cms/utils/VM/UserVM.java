@@ -1,4 +1,4 @@
-package com.briup.apps.cms.utils.VM;
+package com.briup.apps.cms.utils.vm;
 
 public class UserVM {
 	
