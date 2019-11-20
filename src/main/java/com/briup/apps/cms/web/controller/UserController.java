@@ -43,7 +43,7 @@ public class UserController {
 		String token= JwtTokenUtil.createJWT(user.getId(), user.getUsername());
 		
 		Map<String,String> map = new HashMap<>();
-		map.put("token","admin-token");
+		map.put("token",token);
 		return MessageUtil.success(map);
 	}
 	
